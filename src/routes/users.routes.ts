@@ -9,11 +9,9 @@ userRouter.get('/', async (req, res) => {
 
     const userService = new UserService();
 
-    await userService.listUserApi();
+    var users = await userService.listUserApi();
 
-    return res.json({
-        message: 'Hello World'
-    });
+    return res.json(users);
 });
 
 export default userRouter;
