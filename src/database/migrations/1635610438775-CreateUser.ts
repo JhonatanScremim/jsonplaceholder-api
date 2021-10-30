@@ -122,7 +122,7 @@ export default class CreateUser1635610438775 implements MigrationInterface {
                     },
                     {
                         name: 'userNumber',
-                        type: 'varchar',
+                        type: 'int',
                         isNullable: false,
                     },
                     {
