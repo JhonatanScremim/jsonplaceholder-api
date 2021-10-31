@@ -21,9 +21,12 @@ class Address{
     @Column()
     zipcode: string;
 
+    @Column()
+    geoId: string;
+
     @ManyToMany(() => Geo)
     @JoinColumn({name: 'geoId'})
-    geoId: string;
+    geo: Geo;
 }
 
 export default Address;

@@ -96,7 +96,7 @@ export default class CreateUser1635610438775 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
-                        name: 'catchPhase',
+                        name: 'catchPhrase',
                         type: 'varchar',
                         isNullable: false,
                     },

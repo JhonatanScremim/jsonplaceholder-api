@@ -11,7 +11,7 @@ class Company{
     name: string;
 
     @Column()
-    catchPhase: string;
+    catchPhrase: string;
 
     @Column()
     bs: string;

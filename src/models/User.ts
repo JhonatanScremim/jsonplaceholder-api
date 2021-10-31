@@ -11,7 +11,7 @@ class User{
     id: string;
 
     @Column()
-    numberUser: number;
+    userNumber: number;
 
     @Column()
     name: string;
@@ -22,9 +22,12 @@ class User{
     @Column()
     email: string;
 
-    @ManyToMany(() => Address)
-    @JoinColumn({ name: 'addressId'})
+    @Column()
     addressId: string;
+
+    @ManyToMany(() => Address)
+    @JoinColumn({name: 'addres_id'})
+    address: Address;
 
     @Column()
     phone: string;
@@ -32,9 +35,12 @@ class User{
     @Column()
     website: string;
 
+    @Column()
+    companyId: string;
+
     @ManyToMany(() => Company)
     @JoinColumn({name: 'companyId'})
-    companyId: string;
+    company: Company;
 }
 
 export default User;
