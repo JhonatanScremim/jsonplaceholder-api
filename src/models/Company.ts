@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn,
     UpdateDateColumn, ManyToMany, JoinColumn } from 'typeorm';
 
-@Entity('Company')
+@Entity('company')
 class Company{
 
     @PrimaryGeneratedColumn('uuid')

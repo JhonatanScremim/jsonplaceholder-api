@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { json, Router } from 'express';
 
 import User from '../models/User';
 import UserService from '../services/UserService';
@@ -13,5 +13,16 @@ userRouter.get('/', async (req, res) => {
 
     return res.json(users);
 });
+
+userRouter.post('/post-users', async (req, res) => {
+
+    const { idUsers } = req.body;
+
+    const userService = new UserService();
+
+    var users = await userService.SaveInDataBase(idUsers);
+
+    return res.json(users);
+})
 
 export default userRouter;
