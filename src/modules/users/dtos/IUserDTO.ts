@@ -1,7 +1,7 @@
-import AddressDTO from "./AddressDTO";
-import CompanyDTO from "./CompanyDTO";
+import AddressDTO from "./IAddressDTO";
+import CompanyDTO from "./ICompanyDTO";
 
-interface UserDTO{
+export default interface IUserDTO{
     id: number;
     name: string;
     username: string;
@@ -11,5 +11,3 @@ interface UserDTO{
     website: string;
     company: CompanyDTO;
 }
-
-export default UserDTO;

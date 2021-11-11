@@ -1,11 +1,9 @@
-import GeoDTO from "./GeoDTO";
+import GeoDTO from "./IGeoDTO";
 
-interface AddressDTO{
+export default interface IAddressDTO{
     street: string;
     suite: string;
     city: string;
     zipcode:string;
     geo: GeoDTO;
 }
-
-export default AddressDTO;
