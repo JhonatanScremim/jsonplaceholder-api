@@ -1,12 +1,23 @@
 import ICreateUserDTO from "@modules/users/dtos/ICreateUserDTO";
 import IUserRepository from "../IUserRepository";
 import User from '../../infra/typeorm/entities/User';
+import { uuid } from "uuidv4";
 
 
 export default class FakeUserRepository implements IUserRepository{
 
-    public async create(user: ICreateUserDTO): Promise<User> {
-        return new User();
+    private users: User[] = [];
+
+    public async create({name, email, username, userNumber, addressId, companyId,
+        phone, website}: ICreateUserDTO): Promise<User> {
+            const user = new User();
+
+            Object.assign(user, {id:uuid(), name, email, username, userNumber, phone,
+                website, addressId, companyId});
+
+            this.users.push(user);
+
+            return user;
     }
 
 }
