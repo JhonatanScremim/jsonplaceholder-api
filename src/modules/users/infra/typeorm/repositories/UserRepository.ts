@@ -12,9 +12,9 @@ export default class UserRepository implements IUserRepository{
         this.ormRepository = getRepository(User);
     }
 
-    public async findByNumber(numberUser: number): Promise<User | undefined>{
+    public async findByNumber(userNumber: number): Promise<User | undefined>{
         return await this.ormRepository.findOne({
-            where: {numberUser}
+            where: {userNumber}
         });
 
     }

@@ -36,13 +36,11 @@ class UserService{
 
     public async SaveInDataBase( idUsers: Array<number> ): Promise<Array<User> | null>{
 
-        this.ValidationUsers(idUsers);
+        await this.ValidationUsers(idUsers);
 
         let usersDb: Array<User> = [];
 
-        idUsers.forEach(async idUser => {
-
-            const userFind = await this.userRepository.findByNumber(idUser);
+        await Promise.all(idUsers.map(async (idUser) => {
 
             const response = await axios.get(`https://jsonplaceholder.typicode.com/users/${idUser}`);
 
@@ -67,7 +65,7 @@ class UserService{
                 name: user.company.name,
                 bs: user.company.bs,
                 catchPhrase: user.company.catchPhrase,
-            })
+            });
 
             const newUser = await this.userRepository.create({
                 name: user.name,
@@ -79,22 +77,30 @@ class UserService{
                 addressId: address.id,
                 companyId: company.id,
             });
-
             usersDb.push(newUser);
 
-        });
+        }));
+
         return usersDb;
+
     }
 
     private async ValidationUsers(idUsers: Array<number>): Promise<void>{
 
-        idUsers.forEach(async idUser => {
+        let value = new Set(idUsers).size !== idUsers.length;
+
+        if(value){
+            throw new Error(`There are repeat numbers`);
+        }
+
+        await Promise.all(idUsers.map(async idUser => {
 
             let user = await this.userRepository.findByNumber(idUser);
 
-            if(user)
+            if(user){
                 throw new Error(`User already exists: ${idUser}`);
-        })
+            }
+        }));
     }
 }
 

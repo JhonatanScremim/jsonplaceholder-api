@@ -30,7 +30,7 @@ describe('UserService', () => {
         expect(response).toBeDefined();
     });
 
-    it('ValidationUsers', async () => {
+    it('ValidationUsers - User already exists', async () => {
         const fakeAddressRepository = new FakeAddressRepository();
         const fakeUserRepository = new FakeUserRepository();
         const fakeCompanyRepository = new FakeCompanyRepository();
@@ -48,6 +48,16 @@ describe('UserService', () => {
             companyId: '14po12lç31r',
             website: 'website',
         });
+
+        expect(userService.SaveInDataBase([1])).rejects.toBeInstanceOf(Error);
+    });
+
+    it('ValidationUsers - There are repeat numbers', async () => {
+        const fakeAddressRepository = new FakeAddressRepository();
+        const fakeUserRepository = new FakeUserRepository();
+        const fakeCompanyRepository = new FakeCompanyRepository();
+
+        const userService = new UserService(fakeUserRepository, fakeAddressRepository, fakeCompanyRepository);
 
         expect(userService.SaveInDataBase([1, 1])).rejects.toBeInstanceOf(Error);
     });
