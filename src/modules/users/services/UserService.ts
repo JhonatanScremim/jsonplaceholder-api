@@ -36,15 +36,19 @@ class UserService{
 
     public async SaveInDataBase( idUsers: Array<number> ): Promise<Array<User> | null>{
 
+        this.ValidationUsers(idUsers);
+
         let usersDb: Array<User> = [];
 
         idUsers.forEach(async idUser => {
+
+            const userFind = await this.userRepository.findByNumber(idUser);
+
             const response = await axios.get(`https://jsonplaceholder.typicode.com/users/${idUser}`);
 
             let res = JSON.stringify(response.data);
             let user: UserDTO = JSON.parse(res);
 
-            console.log(this.addressRepository);
 
             const geo = await this.addressRepository.createGeo({
                 lat: user.address.geo.lat,
@@ -80,6 +84,17 @@ class UserService{
 
         });
         return usersDb;
+    }
+
+    private async ValidationUsers(idUsers: Array<number>): Promise<void>{
+
+        idUsers.forEach(async idUser => {
+
+            let user = await this.userRepository.findByNumber(idUser);
+
+            if(user)
+                throw new Error(`User already exists: ${idUser}`);
+        })
     }
 }
 

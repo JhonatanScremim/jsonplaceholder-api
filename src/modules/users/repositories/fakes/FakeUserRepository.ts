@@ -20,4 +20,9 @@ export default class FakeUserRepository implements IUserRepository{
             return user;
     }
 
+    public async findByNumber(idUser: number): Promise<User | undefined>{
+
+        return this.users.find(x => x.userNumber === idUser);
+    }
+
 }

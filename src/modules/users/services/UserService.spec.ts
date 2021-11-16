@@ -29,5 +29,27 @@ describe('UserService', () => {
 
         expect(response).toBeDefined();
     });
+
+    it('ValidationUsers', async () => {
+        const fakeAddressRepository = new FakeAddressRepository();
+        const fakeUserRepository = new FakeUserRepository();
+        const fakeCompanyRepository = new FakeCompanyRepository();
+
+        const userService = new UserService(fakeUserRepository, fakeAddressRepository, fakeCompanyRepository);
+
+
+        await fakeUserRepository.create({
+            name: 'Nome',
+            userNumber: 1,
+            email: 'email@gmail.com',
+            phone: '132123',
+            username: 'username',
+            addressId: '12341212lçj1',
+            companyId: '14po12lç31r',
+            website: 'website',
+        });
+
+        expect(userService.SaveInDataBase([1, 1])).rejects.toBeInstanceOf(Error);
+    });
 })
 
