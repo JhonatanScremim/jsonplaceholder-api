@@ -18,4 +18,17 @@ export default class PostController {
 
     }
 
+    public async SaveInDataBase(request: Request, response: Response): Promise<Response>{
+
+        try{
+            const { idPosts } = request.body;
+
+            const postService = container.resolve(PostService);
+
+            return response.json(await postService.SaveInDatabase(idPosts));
+        }
+        catch(err){
+            return response.json(400).json( {error: (err as Error).message} );
+        }
+    }
 }

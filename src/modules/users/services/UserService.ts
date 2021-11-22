@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { inject, injectable } from 'tsyringe';
 
-import UserDTO from '../dtos/IUserDTO';
+import IUserDTO from '../dtos/IUserDTO';
 import Address from '../infra/typeorm/entities/Address';
 import Geo from '../infra/typeorm/entities/Geo';
 import User from '../infra/typeorm/entities/User';
@@ -24,12 +24,12 @@ class UserService{
         private companyRepository: ICompanyRepository
     ){}
 
-    public async listUserApi(): Promise<Array<UserDTO> | null>{
+    public async listUserApi(): Promise<Array<IUserDTO> | null>{
 
         const response = await axios.get('https://jsonplaceholder.typicode.com/users/');
-
         let res = JSON.stringify(response.data);
-        let users: Array<UserDTO> = JSON.parse(res);
+
+        let users: Array<IUserDTO> = JSON.parse(res);
 
         return users;
     }
@@ -45,7 +45,7 @@ class UserService{
             const response = await axios.get(`https://jsonplaceholder.typicode.com/users/${idUser}`);
 
             let res = JSON.stringify(response.data);
-            let user: UserDTO = JSON.parse(res);
+            let user: IUserDTO = JSON.parse(res);
 
 
             const geo = await this.addressRepository.createGeo({
