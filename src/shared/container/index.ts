@@ -1,3 +1,5 @@
+import PostRepository from '@modules/posts/infra/typeorm/repositories/PostRepository';
+import IPostRepository from '@modules/posts/repositories/IPostRepository';
 import AddressRepository from '@modules/users/infra/typeorm/repositories/AddressRepository';
 import CompanyRepository from '@modules/users/infra/typeorm/repositories/CompanyRepository';
 import UserRepository from '@modules/users/infra/typeorm/repositories/UserRepository';
@@ -15,5 +17,9 @@ container.registerSingleton<IAddressRepository>(
 
 container.registerSingleton<ICompanyRepository>(
     'CompanyRepository', CompanyRepository
+);
+
+container.registerSingleton<IPostRepository>(
+    'PostRepository', PostRepository
 );
 

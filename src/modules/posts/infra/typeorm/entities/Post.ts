@@ -11,7 +11,7 @@ export default class Post{
     userId: string;
 
     @Column()
-    postNumber: string;
+    postNumber: number;
 
     @Column()
     title: string;
