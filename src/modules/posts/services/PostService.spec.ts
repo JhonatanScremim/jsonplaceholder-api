@@ -38,6 +38,15 @@ describe('PostService', () => {
         expect(response).toBeDefined();
     });
 
+    it('SaveInDatabasePost - User does not exist', async () => {
+        const fakePostRepository = new FakePostRepository();
+        const fakeUserRepository = new FakeUserRepository();
+
+        const postService = new PostService(fakePostRepository, fakeUserRepository);
+
+        await expect(postService.SaveInDatabase([1])).rejects.toBeInstanceOf(Error);
+    });
+
     it('ValidationPost - Post already exists', async () => {
         const fakePostRepository = new FakePostRepository();
         const fakeUserRepository = new FakeUserRepository();

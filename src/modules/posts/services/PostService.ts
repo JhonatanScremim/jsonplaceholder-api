@@ -42,7 +42,7 @@ export default class PostService {
 
             let user = await this.userRepository.findByNumber(post.userId);
 
-            if(user == null)
+            if(user === undefined)
                 throw new Error('O usuário do post não existe');
 
             const newPost = await this.postRepository.create({
