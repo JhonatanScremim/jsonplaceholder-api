@@ -68,9 +68,9 @@ export default class PostService {
 
         await Promise.all(idPosts.map(async idPost => {
 
-            let user = await this.postRepository.findByNumber(idPost);
+            let post = await this.postRepository.findByNumber(idPost);
 
-            if(user){
+            if(post){
                 throw new Error(`Post already exists: ${idPost}`);
             }
         }));
